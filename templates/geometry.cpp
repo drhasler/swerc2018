@@ -39,3 +39,33 @@ pt projection(seg& s,pt& p) {
     orth.d = point(-s.d.y,s.d.x);
     return intersect(s,orth);
 }
+
+// true if p1 p2 in counter clockwise
+bool turn0(const pt& p1,const pt& p2) { return cross(p1,p2)>0; }
+struct turn {
+    pt center;
+    turn(pt& p) { center = p; }
+    bool operator() (pt& p1,pt& p2) { return cross(p1-center,p2-center)>0; }
+};
+
+struct ngon {
+    int n;
+    pt* pts; // in counter clockwise order
+    ngon(int n,pt* pts) { this->n=n; this->pts=pts; }
+    db area() {
+        db ans = 0;
+        for (int i=1;i<n-1;i++) ans += cross(pts[i]-pts[0],pts[i+1]-pts[0]);
+        return ans/2;
+    }
+    void convexify() { // output is counter clockwise
+        for (int i=1;i<n;i++) if (pts[i]<pts[0]) swap(pts[i],pts[0]);
+        sort(pts+1,pts+n,turn(pts[0]));
+        int cnt=0;
+        for (int i=2;i<n;i++) {
+            while (cnt>=0 && turn0(pts[i]-pts[cnt],pts[cnt+1]-pts[cnt])) cnt--;
+            cnt++; swap(pts[i],pts[cnt+1]);
+        }
+        while (cnt>=0 && turn0(pts[0]-pts[cnt],pts[cnt+1]-pts[cnt])) cnt--;
+        n = cnt+2;
+    }
+};
