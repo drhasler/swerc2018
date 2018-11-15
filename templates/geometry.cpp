@@ -6,9 +6,9 @@ pt {
     db x,y;
     point() {}
     point(db x,db y) { this->x = x; this->y = y; }
-    point operator+(const point& other) const { return point(this->x+other.x,this->y+other.y); }
-    point operator-(const point& other) const { return point(this->x-other.x,this->y-other.y); }
-    point operator*(const db& x) const { return point(this->x*x,this->y*y); }
+    point operator+(const point& other) const { return point(x+other.x,y+other.y); }
+    point operator-(const point& other) const { return point(x-other.x,y-other.y); }
+    point operator*(const db& k) const { return point(k*x,k*y); }
 };
 
 // inlining ???
