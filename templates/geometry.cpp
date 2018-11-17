@@ -69,3 +69,30 @@ struct ngon {
         n = cnt+2;
     }
 };
+
+struct circle {
+    pt c;
+    db r;
+    circle() {}
+    circle(db a,db b,db d): c(a,b) { r=d; }
+};
+
+tuple<bool,pt,pt> intersect(const seg& s,const cir& c) {
+    pt x = project(s,c.c);
+    db d = norm2(x-c.c);
+    if (d > c.r*c.r) return {false,x,x};
+    d = sqrt((c.r*c.r-d)/norm2(s.d));
+    return {true,x-s.d*d,x+s.d*d};
+}
+
+tuple<bool,pt,pt> intersect(const cir& c1,const cir& c2) {
+    // if (c2.r < c1.r) return intersect(c2,c1); better precision
+    pt v = c2.c - c1.c; // dir vector
+    db d = norm2(v); // norm squared
+    if (d > (c1.r+c2.r)*(c1.r+c2.r)) return {false,c1.c,c2.c};
+    db dx = (c1.r*c1.r - c2.r*c2.r + d)/(2*d); // x dist from c1 / norm of v
+    pt c = c1.c + v*dx; // "x" intercept
+    v = point(-v.y,v.x); // rotate
+    db dy = sqrt(c1.r*c1.r/d - dx*dx); // y dist from c / norm of v
+    return {true,(c-v*dy),(c+v*dy)};
+}
