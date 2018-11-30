@@ -1,8 +1,8 @@
 ### Topics in Graph
 
 - Traversal
-    + dfs.cpp
-    + bfs.cpp
+    + dfs
+    + bfs
 
 - Connected
     + toposort
