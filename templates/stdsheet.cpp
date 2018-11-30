@@ -36,6 +36,7 @@ int main() {
     else printf("%d not in vec\n",x);
     map<int,char> m;
     string s; cin >> s;
+    random_shuffle(s.begin(),s.end());
     for (char c:s) m[x++] = c;
     {
         char bigC = 0;
