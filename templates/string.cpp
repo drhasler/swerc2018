@@ -95,6 +95,7 @@ int* suffix_arr(const string& s) { // ending with small char: $
     }
     return p;
 }
+
 // application: longest prefix starting at i
 int* LCP(const string& s,int* p) {
     int n = s.size();
@@ -113,9 +114,8 @@ int* LCP(const string& s,int* p) {
 }
 
 // Ukkonens suffix tree, credits to freopen
-
-const int N=1000000,INF=1000000000;
-string a;
+const int N=1e6,INF=1e9;
+string a; // max size of a is N/2 - 2
 int t[N][26],l[N],r[N],p[N],s[N],tv,tp,ts,la;
 
 void ukkadd (int c) {

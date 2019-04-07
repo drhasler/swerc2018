@@ -6,6 +6,9 @@ Notebook for my team at SWERC 2018, we were ranked 19th out of 89.
 this isnt a good notebook, we just gathered stuff we
 think we would need.
 
+i will adopt a more comprehensible format, the transition
+will happen in drhasler/cp
+
 ## sources of inspiration / good learning material:
 - codeforces CP handbook https://codeforces.com/blog/entry/50728
 - english E-maxx https://cp-algorithms.com/
